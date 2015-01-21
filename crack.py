@@ -97,8 +97,7 @@ args = parser.parse_args()
 # Main Program
 #------------------------------------------------------------------------------
 
-if args.server:
-    print "Running in server mode..."
+if not args.client:
     # Create new CrackManager object to handle cracking process.
     try:
         c = modules.crackmanager.CrackManager(args.config)
@@ -107,7 +106,10 @@ if args.server:
         print "CrackManager configuration unsuccessful:\n"
         print str(err)
         exit()
-        
+
+if args.server:
+    print "Running in server mode..."
+
     try:
         server = sxml.SimpleXMLRPCServer((args.listener_ip, int(args.port)),
             requestHandler=sxml.SimpleXMLRPCRequestHandler)
@@ -157,14 +159,5 @@ else:
     hashfile = open(args.file, "r")
     
     hlist = hashlist(hashfile.read())
-    
-    # Create new CrackManager object to handle cracking process.
-    try:
-        c = modules.crackmanager.CrackManager(args.config)
-        print "CrackManager configured successfully using config file " + args.config
-    except Exception, err:
-        print "CrackManager configuration unsuccessful:\n"
-        print str(err)
-        exit()
         
     c.crack_passwords(hlist, htype)
