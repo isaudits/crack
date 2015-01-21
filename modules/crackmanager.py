@@ -102,7 +102,8 @@ class CrackThread(threading.Thread):
                 dcc, user = line.split(':')
                 key = user
                 self.hashes[key] = dcc.lower()
-            
+        
+        #Generic hash types in format of username:hash    
         else:
             hashes = []
             for line in self.hash_list:
@@ -146,11 +147,7 @@ class CrackThread(threading.Thread):
         These are positional variables in the process_hash function.        
         """
         
-        #replaced this regex because it was not correctly parsing passwords
-        #Regex_rcracki_mt = "([A-Za-z0-9.]+)\s+(.?)\s+hex:.*"
         Regex_rcracki_mt = "([A-Za-z0-9.]+)\s+(.*?)\s+hex:.*"
-        #replaced this regex because was excluding user names with non-alphanumeric chars
-        #Regex_john = "([A-Za-z0-9.]*):(.*?):(.*?):.*?"
         Regex_john = "(.*?):(.*?):(.*?):.*?"
         Regex_hashcat_dcc = "([0-9a-f]{16,}):.*:(.*)"
         Regex_hashcat_standard = "([0-9a-f]{16,}):(.*)"

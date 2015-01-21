@@ -5,17 +5,19 @@
 # The commands will be tried in order from top to bottom. Each command line
 # should define include the {file} and {output} tags in the appropriate places.
 #
-# To simplify some of the code we define the following hash types:
+# To simplify some of the processing of output we specifically define the following hash types:
 #	pwdump* (hash type must be either pwdump-lm or pwdump-nt)
 #	john* (hash type must start with 'john'; designed to work with filenames generated from
 #			metasploit, such as john_netntlm, john_netntlmv2, etc.; parser looks for "v2" at
 #			the end of the file name to correctly parse v1 vs. v2 files)
-#	ike
 #	dcc
+#       wifi (pcap)
+#       ike
 # Commands associated with the pwdump type must accept a file in pwdump format.
-# Commands associated with the ike type must accept a file in ike-scan psk-crack format.
-# Commands associated with dcc should accept a file in the username:hash format,
+# Commands associated with dcc should accept a file in the hash:username format,
 # similar to hashcat.
+#
+# Non-defined hash types may be added as you wish if in the format username:hash
 #
 # NOTE - ALL JTR commands must end with a separate john --show command to feed results
 # of john commands to stdout for parsing

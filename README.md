@@ -1,11 +1,19 @@
-crackserver
+crack
 ===========
 
-XMLRPC Server &amp; Client for hash cracking
+Password hash cracking automation utility with XMLRPC server and client modes
 
-crackserver.py - server component
-crackclient.py - client component
-crack.py - same cracking functionality but performed locally instead of client / server
+A hash file and type are submitted for processing and one or more commands are
+parsed from a config file to crack the hashes.
+
+3 modes of operation:
+- standalone
+- client (connects to remote server mode via XMLRPC)
+- server (listens for connections from client mode)
+
+Client/server modes allow hashes to be submitted from a client to a remote
+running in server mode. The server processes the hashes in the same manner as a
+standalone cracking session and returns the results when finished.
 
 ---------------------------------------------------------------------------------------------------
 

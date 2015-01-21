@@ -1,17 +1,16 @@
 #!/usr/bin/env python
 '''
-Module for performing a standalone cracking operation rather than using the
-client server capabilities of crackserver.py and crackclient.py. Uses the same
-core modules as the crackserver applications for performing cracking operation.
-
-Takes a file, a server:port combination, and a hash type. 
+Crackclient makes xmlrpc calls to a crack server to automate password
+cracking. Crackclient takes a file, a server:port combination, and a hash
+type. The file and hash type are passed to the server and the server returns
+an id. The id can be polled to get the results and to see if all of the
+cracking processes are finished.
 
 Acceptable hash types are defined in config file associated with
 listening crackserver instance.
 
-While crackserver.py is dependent upon core modules contained in other files,
-crackclient.pl is dependent only upon standard python modules
-
+Optionally, the application can be run in standalone mode (no client/server
+flags) and performs cracking operations locally using same config file
 '''
 
 import argparse
