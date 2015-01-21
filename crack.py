@@ -15,8 +15,8 @@ crackclient.pl is dependent only upon standard python modules
 '''
 
 import argparse
-from modules.core_crackserver import *
-from modules.core import *
+import modules.core_crackserver
+import modules.core
 
 class hashlist:
     '''
@@ -37,7 +37,7 @@ class hashlist:
 #check to see if specified config file exists; if not copy default
 config_file = "config/crack.cfg"
 config_default = "config/crack.default"
-check_default_config(config_file, config_default)
+modules.core.check_default_config(config_file, config_default)
 
 
 #------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ hlist = hashlist(hashfile.read())
 
 # Create new CrackManager object to handle cracking process.
 try:
-    c = CrackManager(args.c)
+    c = modules.core_crackserver.CrackManager(args.c)
     print "CrackManager configured successfully using config file " + args.c
 except Exception, err:
     print "CrackManager configuration unsuccessful:\n"

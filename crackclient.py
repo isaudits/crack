@@ -17,19 +17,19 @@ crackclient.py is dependent only upon standard python modules
 import xmlrpclib
 import argparse
 import time
-from modules.core import *
+import modules.core
 
 #------------------------------------------------------------------------------
 # Get values from config file
 #------------------------------------------------------------------------------
 config_file = "config/crackclient.cfg"
 config_default = "config/crackclient.default"
-check_default_config(config_file, config_default)
+modules.core.check_default_config(config_file, config_default)
 
-server_ip = check_config("SERVER_IP", config_file)
+server_ip = modules.core.check_config("SERVER_IP", config_file)
 if server_ip == "": server_ip = "127.0.0.1"
 
-server_port = check_config("SERVER_PORT", config_file)
+server_port = modules.core.check_config("SERVER_PORT", config_file)
 if server_port == "": server_port = "8000"
 
 #------------------------------------------------------------------------------

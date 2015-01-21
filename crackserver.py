@@ -5,8 +5,8 @@ Launches an XMLRPC listener for password cracking requests from crackclient.py
 
 import SimpleXMLRPCServer as sxml
 import argparse
-from modules.core import *
-from modules.core_crackserver import *
+import modules.core_crackserver
+import modules.core
 
 #------------------------------------------------------------------------------
 # Get values from config file
@@ -15,20 +15,20 @@ from modules.core_crackserver import *
 #check to see if specified config file exists; if not copy default
 config_file = "config/crackserver.cfg"
 config_default = "config/crackserver.default"
-check_default_config(config_file, config_default)
+modules.core.check_default_config(config_file, config_default)
 
-server_ip = check_config("SERVER_IP", config_file)
+server_ip = modules.core.check_config("SERVER_IP", config_file)
 if server_ip == "": server_ip = "127.0.0.1"
 
-server_port = check_config("SERVER_PORT", config_file)
+server_port = modules.core.check_config("SERVER_PORT", config_file)
 if server_port == "": server_port = "8000"
 
-crack_config = check_config("CRACK_CONFIG", config_file)
+crack_config = modules.core.check_config("CRACK_CONFIG", config_file)
 if crack_config == "": crack_config = "config/crack.cfg"
 
 config_file = "config/crack.cfg"
 config_default = "config/crack.default"
-check_default_config(config_file, config_default)
+modules.core.check_default_config(config_file, config_default)
 
 #------------------------------------------------------------------------------
 # Configure Argparse to handle command line arguments
@@ -52,7 +52,7 @@ args = parser.parse_args()
 
 # Create new CrackManager object to handle cracking process.
 try:
-    c = CrackManager(args.c)
+    c = modules.core_crackserver.CrackManager(args.c)
     print "CrackManager configured successfully using config file " + args.c
 except Exception, err:
     print "CrackManager configuration unsuccessful:\n"
