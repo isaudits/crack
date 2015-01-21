@@ -15,6 +15,9 @@ Client/server modes allow hashes to be submitted from a client to a remote
 running in server mode. The server processes the hashes in the same manner as a
 standalone cracking session and returns the results when finished.
 
+An example config file (crack.default) is included and should be copied to
+crack.cfg and edited to specify the location of dictionaries / rainbow tables
+
 ---------------------------------------------------------------------------------------------------
 
 Copyright 2011 Stephen Haywood aka AverageSecurityGuy (<https://github.com/averagesecurityguy/crack/>)
