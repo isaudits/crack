@@ -16,10 +16,14 @@ flags) and performs cracking operations locally using same config file
 import argparse
 import xmlrpclib
 import time
+import os
 import SimpleXMLRPCServer as sxml
 
 import modules.crackmanager
 import modules.core
+
+#Change the working directory to the main program directory just in case...
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
 class hashlist:
     '''
