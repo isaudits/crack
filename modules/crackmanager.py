@@ -43,6 +43,21 @@ class CrackThread(threading.Thread):
             print r.rstrip('\r\n')
         os.remove(self.hash_file)
         
+    def run(self):
+        """Overwrites default run method for Threading.Thread class.
+        
+        For each command, process the hash_list, modify the command to
+        include the correct file name on disk, and run the command. Once the
+        command is run, we process the output, which include updating the hash
+        list to remove found hashes."""
+                
+        for cmd in self.commands:
+            self.process_hash_list()
+            cmd = self.fix_cmd(cmd)
+            #run command and return output using subprocess
+            self.process_output(subprocess.check_output(cmd))
+        self.complete = True
+        
     def process_hash_list(self):
         """Process the file passed to us and extract the usernames, then write
         the file to disk for processing by the commands. Pwdump files and DCC
@@ -204,17 +219,7 @@ class CrackThread(threading.Thread):
             if cmd[c] == '{file}': cmd[c] = os.path.join(os.getcwd(),self.hash_file)
         return cmd 
 
-    def run(self):
-        """For each command, process the hash_list, modify the command to
-        include the correct file name on disk, and run the command. Once the
-        command is run, we process the output, which include updating the hash
-        list to remove found hashes."""
-                
-        for cmd in self.commands:
-            self.process_hash_list()
-            cmd = self.fix_cmd(cmd)
-            self.process_output(subprocess.check_output(cmd))
-        self.complete = True
+
 
 
 #------------------------------------------------------------------------------
